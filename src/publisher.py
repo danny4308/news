@@ -16,17 +16,17 @@ def publish_draft(content: str, issue_number: int = None) -> dict:
     publication_id = os.environ["BEEHIIV_PUBLICATION_ID"]
 
     week = datetime.now().strftime("%B %d, %Y")
-    subject = f"The Pulse — Week of {week}"
+    title = f"The Pulse — Week of {week}"
     if issue_number:
-        subject = f"The Pulse #{issue_number} — Week of {week}"
+        title = f"The Pulse #{issue_number} — Week of {week}"
 
     html_content = _markdown_to_html(content)
 
     payload = {
-        "subject": subject,
-        "body": html_content,
+        "subject": title,
+        "title": title,
+        "body_content": html_content,
         "status": "draft",
-        "content_tags": [],
     }
 
     resp = requests.post(
