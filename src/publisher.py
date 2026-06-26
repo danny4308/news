@@ -27,14 +27,11 @@ def publish_draft(content: str, issue_number: int = None) -> dict:
     # Convert markdown-ish content to simple HTML for Beehiiv
     html_content = _markdown_to_html(content)
 
-    payload = {
+   payload = {
         "subject": subject,
-        "content": {
-            "free": html_content,          # visible to all subscribers
-            "premium": "",                  # premium-only section (add if needed)
-        },
-        "status": "draft",                  # DRAFT — you review before sending
-        "audience": "free",
+        "body": html_content,
+        "status": "draft",
+        "content_tags": [],
     }
 
     resp = requests.post(
